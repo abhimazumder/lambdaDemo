@@ -1,0 +1,60 @@
+service: address-book
+
+frameworkVersion: "3"
+
+provider:
+  provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: ap-south-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource: "*"
+
+functions:
+  addAddress:
+    handler: addAddress.handle
+    memorySize: 128
+    description: Add address to addressbook aka DynamoDB Table
+    events:
+      - http:
+          path: addaddress
+          method: post
+  getAddresses:
+    handler: getAddresses.handle
+    memorySize: 128
+    description: Get all addresses from addressbook aka DynamoDB Table
+    events:
+      - http:
+          path: getaddresses
+          method: get
+  getSingleAddress:
+    handler: getSingleAddress.handle
+    memorySize: 128
+    description: Get all details of a particuar address from addressbook aka DynamoDB Table
+    events:
+      - http:
+          path: getSingleAddress
+          method: get
+
+resources:
+  Resources:
+    addressBook:
+      Type: "AWS::DynamoDB::Table"
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: "id"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "id"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
