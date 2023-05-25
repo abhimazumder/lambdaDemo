@@ -26,6 +26,14 @@ functions:
       - http:
           path: addaddress
           method: post
+  getAddress:
+    handler: getAddress.handle
+    memorySize: 128
+    description: Get a single address from addressbook aka DynamoDB Table
+    events:
+      - http:
+          path: getaddress
+          method: get
   getAddresses:
     handler: getAddresses.handle
     memorySize: 128
@@ -33,14 +41,6 @@ functions:
     events:
       - http:
           path: getaddresses
-          method: get
-  getSingleAddress:
-    handler: getSingleAddress.handle
-    memorySize: 128
-    description: Get all details of a particuar address from addressbook aka DynamoDB Table
-    events:
-      - http:
-          path: getSingleAddress
           method: get
 
 resources:
