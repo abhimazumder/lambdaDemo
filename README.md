@@ -2,9 +2,6 @@
 
 <ul>
     <li>
-        <strong></strong> - 
-    </li>
-    <li>
         <strong>POST</strong> - https://clsrit41f6.execute-api.ap-south-1.amazonaws.com/dev/addaddress
     </li>
     <li>
