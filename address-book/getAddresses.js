@@ -16,7 +16,7 @@ module.exports.handle = async (event) => {
     const data = await documentClient.scan(params).promise();
     responseBody = data.Items;
     statusCode = 200;
-    
+
   } catch (err) {
     responseBody = `Unable to get addresses: ${err.message}`;
     statusCode = 403;
@@ -29,7 +29,7 @@ module.exports.handle = async (event) => {
     },
     body: JSON.stringify(
       {
-        body: responseBody,
+        responseBody: responseBody,
         input: event
       },
       null,

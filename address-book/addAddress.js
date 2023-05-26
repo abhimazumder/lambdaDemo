@@ -24,7 +24,7 @@ module.exports.handle = async (event) => {
         phone: phone,
       },
     };
-    
+
     const data = await documentClient.put(params).promise();
     responseBody = params.Item;
     statusCode = 201;
@@ -40,7 +40,7 @@ module.exports.handle = async (event) => {
     },
     body: JSON.stringify(
       {
-        body: responseBody,
+        responseBody: responseBody,
         input: event
       },
       null,

@@ -37,7 +37,7 @@ module.exports.handle = async (event) => {
     },
     body: JSON.stringify(
       {
-        body: responseBody,
+        responseBody: responseBody,
         input: event,
       },
       null,

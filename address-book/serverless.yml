@@ -15,6 +15,8 @@ provider:
         - dynamodb:Scan
         - dynamodb:GetItem
         - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
       Resource: "*"
 
 functions:
@@ -42,6 +44,22 @@ functions:
       - http:
           path: getaddresses
           method: get
+  updateAddress:
+    handler: updateAddress.handle
+    memorySize: 128
+    description: Update a attribute of a single address from addressbook aka DynamoDB Table
+    events:
+      - http:
+          path: updateaddress
+          method: post
+  deleteAddress:
+    handler: deleteAddress.handle
+    memorySize: 128
+    description: Delete a single address from addressbook aka DynamoDB Table
+    events:
+      - http:
+          path: deleteaddress
+          method: delete
 
 resources:
   Resources:
